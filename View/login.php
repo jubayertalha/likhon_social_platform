@@ -12,6 +12,9 @@
         $userName = $_POST['userName'];
         $loginCtr = new LoginCtr($userName,$pass);
         $data = $loginCtr->login();
+        if($data['status']!="incomplete"){
+            setcookie("userName",$userName,time()+86400,'/');
+        }
     }
 ?>
 
@@ -31,11 +34,9 @@
 
             <input type="submit" name="submit" value="Login">
             </form>
-        <?php } else{ 
-            setcookie("userName",$userName,time()+86400,'/');
-        ?>
+        <?php } else{ ?>
             <h3>Login Complete</h3><br>
-            <a href="http://likhon.com/">Go to home</a>
+            <a href="\">Go to home</a>
         <?php } ?>
     </body>
 </html>

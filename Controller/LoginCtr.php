@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
     class LoginCtr{
         public $userName; 
         public $pass;
@@ -27,7 +27,6 @@
             }
 
             if($valid){
-                session_start();
                 if(isset($_SESSION['userName'])){
                     $this->userName = $this->finterInput($this->userName);
                     if ($this->userName == $_SESSION['userName']) {

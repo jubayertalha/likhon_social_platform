@@ -1,7 +1,7 @@
 <?php 
     if(isset($_GET['submit'])){
         setcookie("userName","",time()-86400,'/');
-        header('location:../index.php');
+        header('location:../');
     }
 ?>
 
