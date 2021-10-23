@@ -1,5 +1,6 @@
 <?php
     require_once('../Model/User.php');
+    require_once('DBCtr.php');
     class RegistrationCtr{
         public $user; 
         public $cpass;
@@ -95,11 +96,68 @@
             }
 
             if($valid){
-                $data['status'] = "done";
+                $data = $this->addUser($data);
             }
 
             return $data;
             
+        }
+
+        public function addUser($data){
+            $db = new DBCtr();
+            $conn = $db->connection();
+
+            $valid = false;
+
+            if($this->checkUniqueUserName($conn)){
+                if($this->checkUniqueEmail($conn)){
+                    $valid = true;
+                }else{
+                    $data['emailErr'] = " *This email is already linked with another account.";
+                }
+            }else{
+                $data['userNameErr'] = " *This user name is already registered.";
+            }
+
+            if(!$valid) return $data;
+            
+            $sql = "INSERT INTO users VALUES (
+                '".$this->user->userName."',
+                '".$this->user->fullName."',
+                '".$this->user->email."',
+                '".$this->user->gender."',
+                '".$this->user->dob."',
+                '".$this->user->pass."',
+                '".$this->user->pic."');";
+
+            if($conn->query($sql) === TRUE){
+                $data['status'] = "done";
+            }else{
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            $conn->close();
+
+            return $data;
+        }
+
+        public function checkUniqueUserName($conn){
+            $sql = "SELECT * FROM users WHERE user_name = '".$this->user->userName."';";
+            $result = $conn->query($sql);
+            if($result->num_rows>0){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        public function checkUniqueEmail($conn){
+            $sql = "SELECT * FROM users WHERE email = '".$this->user->email."';";
+            $result = $conn->query($sql);
+            if($result->num_rows>0){
+                return false;
+            }else{
+                return true;
+            }
         }
 
         public function finterInput($input) {

@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
     require_once('../Controller/RegistrationCtr.php');
     $user = new User("","","","","","","");
     $data = [
@@ -63,10 +63,7 @@
 
             <input type="submit" name="submit" value="Register">
             </form>
-        <?php } else{ 
-            $_SESSION['userName'] = $user->userName;
-            $_SESSION['pass'] = $user->pass;
-        ?>
+        <?php } else{ ?>
             <h3>Registration Complete</h3><br>
             <a href="\">Go to home</a>
         <?php } ?>

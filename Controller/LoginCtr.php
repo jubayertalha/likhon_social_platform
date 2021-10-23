@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+    require_once('DBCtr.php');
     class LoginCtr{
         public $userName; 
         public $pass;
@@ -26,21 +27,24 @@
                 $valid = false;
             }
 
-            if($valid){
-                if(isset($_SESSION['userName'])){
-                    $this->userName = $this->finterInput($this->userName);
-                    if ($this->userName == $_SESSION['userName']) {
-                        if($this->pass == $_SESSION['pass']){
-                            $data['status'] = "done";
-                        }else{
-                            $data['passErr'] = " *Password doesn't match.";
-                        }
-                    }else{
-                        $data['userNameErr'] = " *Can not find this user name.";
-                    }
-                }else{
-                    $data['userNameErr'] = " *Can not find this user name.";
+            if(!$valid) return $data;
+
+            $db = new DBCtr();
+            $conn = $db->connection();
+            $sql = "SELECT * FROM users WHERE user_name = '".$this->userName."';";
+            $result = $conn->query($sql);
+            if($result->num_rows==1){
+                $pass = "";
+                while($row = $result->fetch_assoc()) {
+                   $pass = $row["pass"];
                 }
+                if($pass == $this->pass){
+                    $data['status'] = "done";
+                }else{
+                    $data['passErr'] = " *Password didn't matched.";
+                }
+            }else{
+                $data['userNameErr'] = " *Can not find the user name.";
             }
 
             return $data;
