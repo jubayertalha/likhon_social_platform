@@ -1,3 +1,8 @@
+<?php session_start();
+    if(isset($_SESSION['userName'])){
+        header('location:home.php');
+    }
+?>
 <?php
     require_once('../Controller/RegistrationCtr.php');
     $user = new User("","","","","","","");
@@ -9,13 +14,23 @@
         'passErr' => "",
         'cpassErr' => "",
         'picErr' => "",
+        'genderErr' => "",
+        'agreeErr' => "",
         'status' => "incomplete"
     ];
     $cpass = "";
+    $gender = "";
+    $agree = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $cpass = $_POST['cpass'];
-        $user = new User($_POST['fullName'],$_POST['userName'],$_POST['email'],$_POST['gender'],$_POST['dob'],$_POST['pass'],"");
-        $regCtr = new RegistrationCtr($user,$cpass);
+        if(isset($_POST['gender'])){
+            $gender = $_POST['gender'];
+        }
+        if(isset($_POST['agree'])){
+            $agree = $_POST['agree'];
+        }
+        $user = new User($_POST['fullName'],$_POST['userName'],$_POST['email'],$gender,$_POST['dob'],$_POST['pass'],"");
+        $regCtr = new RegistrationCtr($user,$cpass,$agree);
         $data = $regCtr->register();
     }
 ?>
@@ -24,11 +39,10 @@
     <head>
         <title>Likhon || Registration</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
-        <link rel="stylesheet" type="text/css" href="../CSS/lrform.css">
+        <style><?php include '../CSS/style.css'; include '../CSS/lrform.css'; ?></style>
     </head>
     <body>
-        <?php require_once('header_login.html');?>
+        <?php require_once('header_login.php');?>
         <div class="main_container">
         <div class="form_container">
         <div class="title">
@@ -53,7 +67,7 @@
             <label style="color:red;"><?php echo $data['cpassErr'];?></label>
             <div class="gender">
             Gender*:
-            <input type="radio" name="gender" required
+            <input type="radio" name="gender"
             <?php if (isset($user->gender) && $user->gender=="Female") echo "checked";?>
             value="Female">Female
             <input type="radio" name="gender"
@@ -63,6 +77,7 @@
             <?php if (isset($user->gender) && $user->gender=="Other") echo "checked";?>
             value="Other">Other
             </div>
+            <label style="color:red;"><?php echo $data['genderErr']; ?></label><br>
 
             Date of Birth*: 
             <input type="date" name="dob" placeholder="Date of Birth" value="<?php echo $user->dob;?>">
@@ -70,8 +85,9 @@
             
             <div class="agree">
             Agree to Terms of Service*:
-            <input type="checkbox" name="agree" required value="agree">
+            <input type="checkbox" name="agree" value="agree">
             </div>
+            <label style="color:red;"><?php echo $data['agreeErr'];?></label>
             
             <input type="submit" name="submit" value="Register">
             </form>

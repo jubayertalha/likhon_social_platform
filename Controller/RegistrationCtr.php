@@ -4,10 +4,12 @@
     class RegistrationCtr{
         public $user; 
         public $cpass;
+        public $agree;
 
-        public function __construct($user,$cpass){
+        public function __construct($user,$cpass,$agree){
             $this->user = $user;
             $this->cpass = $cpass;
+            $this->agree = $agree;
         }
 
         public function register(){
@@ -19,6 +21,8 @@
                 'passErr' => "",
                 'cpassErr' => "",
                 'picErr' => "",
+                'genderErr' => "",
+                'agreeErr' => "",
                 'status' => "incomplete"
             ];
             $valid = true;
@@ -93,6 +97,16 @@
                     $data['dobErr'] = " *12+ age required.";
                     $valid = false;
                 }
+            }
+
+            if (empty($this->user->gender)) {
+                $data['genderErr'] = " *Gender is required.<br>";
+                $valid = false;
+            }
+
+            if (empty($this->agree)) {
+                $data['agreeErr'] = " *Must agree to the terms of services.<br>";
+                $valid = false;
             }
 
             if($valid){

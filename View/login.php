@@ -1,3 +1,8 @@
+<?php session_start();
+    if(isset($_SESSION['userName'])){
+        header('location:home.php');
+    }
+?>
 <?php
     require_once('../Controller/LoginCtr.php');
     $userName = "";
@@ -7,13 +12,21 @@
         'passErr' => "",
         'status' => "incomplete"
     ];
+    if(isset($_COOKIE['userName'])){
+        $userName = $_COOKIE['userName'];
+        $pass = $_COOKIE['pass'];
+    }
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $pass = $_POST['pass'];
         $userName = $_POST['userName'];
         $loginCtr = new LoginCtr($userName,$pass);
         $data = $loginCtr->login();
         if($data['status']!="incomplete"){
-            setcookie("userName",$userName,time()+86400,'/');
+            if(isset($_POST['rem'])){
+                setcookie("userName",$userName,time()+86400,'/');
+                setcookie("pass",$pass,time()+86400,'/');
+            }
+            $_SESSION['userName'] = $userName;
         }
     }
 ?>
@@ -22,11 +35,10 @@
     <head>
         <title>Likhon || Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
-        <link rel="stylesheet" type="text/css" href="../CSS/lrform.css">
+        <style><?php include '../CSS/style.css'; include '../CSS/lrform.css'; ?></style>
     </head>
     <body>
-        <?php require_once('header_login.html');?>
+        <?php require_once('header_login.php');?>
         <div class="main_container">
         <div class="form_container">
         <div class="title">
@@ -42,7 +54,12 @@
             <label style="color:red;"><?php echo $data['passErr'];?></label>
 
             <input type="submit" name="submit" value="Login">
+            <div class="remember">
+                <input type="checkbox" name="rem">
+                <h>Remember me</h>
+            </div>
             </form>
+            
             <div class="bottom">
             <h>Don't have an account?</h>
             <a href="registration.php">Register Now</a>

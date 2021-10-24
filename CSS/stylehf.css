@@ -15,7 +15,7 @@ body{
     background-color:rgb(6, 207, 130);
 }
 
-.header h2{
+#home{
     margin-top: 12px;
     margin-left: 10px;
     margin-right: 20px;
@@ -23,6 +23,19 @@ body{
     border: 0px;
     padding: 0px;
     color:rgb(67, 65, 70);
+    display: inline-block;
+    text-decoration: none;
+    font-size: 26px;
+    text-align: center;
+    font-weight: bold;
+    padding-block-start: 0px;
+    padding-block-end: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#home:hover:not(.active){
+    background-color:rgba(240, 248, 255, 0);
 }
 
 .header ul{
@@ -37,9 +50,9 @@ body{
     display: inline;
 }
 
-.header li:last-child{
-    float:right;
-    margin-right: 25px;
+.right{
+    margin-left: auto;
+    margin-right: 15px;
 }
 
 .header a{

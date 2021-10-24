@@ -1,6 +1,5 @@
-<?php
-    
-    if(isset($_COOKIE['userName']) && !empty($_COOKIE['userName'])){
+<?php session_start();
+    if(isset($_SESSION['userName'])){
         header('location:View/home.php');
     }
 ?>
@@ -9,11 +8,10 @@
     <head>
         <title>Likhon</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
-        <link rel="stylesheet" type="text/css" href="../CSS/index.css">
+        <style><?php include 'CSS/style.css'; include 'CSS/index.css'; include 'CSS/stylehf.css'; ?></style>
     </head>
     <body>
-        <?php require_once('View/header_login.html');?>
+        <?php require_once('View/header_login.php');?>
         <div class = "main_container">
             <div class="welcome">
                 <h1>Welcome to Likhon</h1>
