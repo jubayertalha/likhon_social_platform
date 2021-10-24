@@ -1,18 +1,14 @@
-<?php 
-    if(isset($_GET['submit'])){
-        setcookie("userName","",time()-86400,'/');
-        header('location:../');
-    }
-?>
-
 <html>
     <head>
-        <title>Likhon</title>
+        <title>Likhon || Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     </head>
-    <body style="margin:50">
+    <body>
+        <?php require_once('header.html');?>
+        <div class="main_container">
         <h1>Welcome <?php echo $_COOKIE['userName']?></h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="GET">
-            <input type="submit" name="submit" value="Logout">
         </form>
+        </div>
     </body>
 </html>

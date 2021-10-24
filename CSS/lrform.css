@@ -1,0 +1,114 @@
+.form_container{
+    width: 300px;
+    height: 95vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    border-bottom: 6px solid rgb(6, 207, 130);
+}
+
+.title h1{
+    font-size: 36px;
+    font-weight: normal;
+    margin: 10px 0px 10px 0px;
+}
+
+.title a{
+    padding: 10px;
+    border: 1px solid rgb(6, 207, 130);
+    text-decoration: none;
+    color: gray;
+}
+
+.title a:hover{
+    background-color: whitesmoke;
+}
+
+.form_container input{
+    width: 100%;
+    font-size: 14px;
+    padding: 6px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.form_container input[type=submit]{
+    background-color: whitesmoke;
+    border: 1px solid rgb(6, 207, 130);
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form_container input:hover[type=submit]{
+    background-color: rgb(6, 207, 130);
+}
+
+.form_container label{
+    margin-bottom: 10px;
+}
+
+.bottom{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottom a{
+    padding: 8px;
+    border: 1px solid rgb(6, 207, 130);
+    border-radius: 16px;
+    text-decoration: none;
+    color: black;
+}
+
+.bottom a:hover{
+    background-color: whitesmoke;
+}
+
+#back{
+    padding: 10px 20px 10px 20px;
+    border: 1px solid gray;
+    color:rgb(67, 65, 70);
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+#back:hover{
+    background-color: rgb(6, 207, 130);
+}
+
+.gender{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gender input[type="radio"]{
+    margin: 0px;
+}
+
+.agree{
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.agree input[type="checkbox"]{
+    margin-top: 2px;
+    margin-left: 8px;
+    width: fit-content;
+}
