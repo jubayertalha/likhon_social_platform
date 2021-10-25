@@ -7,14 +7,15 @@
     $user = $userController->getAllUserInfo();
     $pic = "";
     $picName = "";
+    $oldPic = "";
     if(empty($user->pic)){
         $pic = "../Pic/avatar.png";
     }else{
         $pic = "../Pic/$user->userName/$user->pic";
         $picName = $user->pic;
+        $oldPic = $pic;
     }
     $msg = "";
-    $oldPic = $pic;
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $fileName = $_FILES['file']['name'];
         $fileType = $_FILES['file']['type'];
