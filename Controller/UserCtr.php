@@ -8,6 +8,18 @@
             $this->userName = $userName;
         }
 
+        public function chectUserName(){
+            $db = new DBCtr();
+            $conn = $db->connection();
+            $sql = "SELECT * FROM users WHERE user_name = '".$this->userName."';";
+            $result = $conn->query($sql);
+            if($result->num_rows==1){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         public function getAllUserInfo(){
             $db = new DBCtr();
             $conn = $db->connection();

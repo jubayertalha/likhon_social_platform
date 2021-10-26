@@ -1,8 +1,19 @@
-<?php
-    require_once('../Controller/session.php');
+<?php require_once('../Controller/session.php');
     $userName = $_SESSION['userName'];
     require_once('../Controller/UserCtr.php');
     require_once('../Model/User.php');
+    $isOwner = true;
+    if(isset($_GET['id'])&&!empty($_GET['id'])){
+        $id = htmlspecialchars($_GET['id']);
+        if($id != $userName){
+            $userController = new UserCtr($userName);
+            $valid = $userController->chectUserName($id);
+            if($valid){
+                $userName = $id;
+                $isOwner = false;
+            }
+        }
+    }
     $userController = new UserCtr($userName);
     $user = $userController->getAllUserInfo();
     $pic = "";
@@ -26,7 +37,8 @@
                 <div class="cover">
                     <div class="pic">
                     <img id="image" src="<?php $date = new DateTime(); $time = $date->format('YmdHis'); echo $pic."?=".$time; ?>" alt="Profile Image">
-                        <a id="change" href="../View/upload.php">Change Pic</a>
+                    <?php if($isOwner){?><a id="change" href="../View/upload.php">Change Pic</a><?php }
+                    else{ ?> <a id="change" href="#">Follow</a><?php } ?>
                     </div>
                     <div class="info">
                         <h2><?php echo $user->fullName; ?></h2>
@@ -37,7 +49,7 @@
                             <h>Email: <?php echo $user->email; ?></h>
                         </div>
                     </div>
-                    <a id="edit" href="#">Edit</a>
+                    <?php if($isOwner){?><a id="edit" href="#">Edit</a><?php } ?>
                 </div>
             </div>
         </div>

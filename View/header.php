@@ -17,7 +17,7 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href="/View/profile.php"><?php echo $userName;?></a></li>
+                <li><a href="/View/profile.php?id=<?php echo $userName;?>"><?php echo $userName;?></a></li>
                 <li><a href="/Controller/logout.php">Logout</a></li>
             </ul>
         </div>

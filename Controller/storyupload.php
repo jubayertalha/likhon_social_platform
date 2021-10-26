@@ -1,5 +1,6 @@
 <?php require_once('../Controller/session.php');
     require_once('DBCtr.php');
+    require_once('StoryCtr.php');
     require_once('../Model/Story.php');
     $userName = $_SESSION['userName'];
     $targeteLoc = "../Story/$userName/";
@@ -18,14 +19,12 @@
         fwrite($file, json_encode($post));
         fclose($file);
         $story = new Story($id,$userName,$time,"","");
-        $db = new DBCtr();
-        $conn = $db->connection();
-        $sql = "INSERT INTO stories VALUES ('$story->storyID', '$story->userName', '$story->date', '$story->categoryID','$story->coverPic');";
-        if($conn->query($sql)===TRUE){
-            header('location:../View/profile.php');
+        $storyctr = new StoryCtr($id);
+        $valid = $storyctr->addStory($story);
+        if($valid){
+            header('location:../View/story.php?id='.$id);
         }else{
             header('location:../View/post.php');
         }
-        $conn->close();
     }
 ?>
