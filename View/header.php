@@ -11,8 +11,8 @@
         <div class="left">
             <ul>
                 <li><a href="/View/home.php">Home</a></li>
-                <li><a href="#">Post</a></li>
-                <li><a href="#">Search</a></li>
+                <li><a href="/View/post.php">Post</a></li>
+                <li><a href="#">Writers</a></li>
             </ul>
         </div>
         <div class="right">

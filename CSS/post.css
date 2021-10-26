@@ -1,0 +1,100 @@
+.main_container{
+    width: 100%;
+    position: absolute;
+    top: 53px;
+    background-color: rgb(255, 246, 235);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.post{
+    width: 60%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    background-color: rgba(6, 207, 130, 0.2);
+    border-radius: 10px;
+    margin-bottom: 70px;
+}
+
+.post h1{
+    border-bottom: 5px solid rgba(6, 207, 130);
+    margin: 0px;
+    padding-bottom: 20px;
+}
+
+.form_group{
+    margin-top: 20px;
+    width: 100%;
+}
+
+#title{
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    border: 1px dashed rgba(6, 207, 130,0.9);
+    border-radius: 10px;
+}
+
+#title:focus{
+    outline: rgba(6, 207, 130,0.9) solid 1px;
+    border: none;
+}
+
+#story{
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px dashed rgba(6, 207, 130,0.9);
+    border-radius: 10px;
+    margin-top: 20px;
+    resize: none;
+}
+
+#story:focus{
+    outline: rgba(6, 207, 130,0.9) solid 1px;
+    border: none;
+}
+
+.button{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    margin-left: 5px;
+}
+
+#submit{
+    font-size: 18px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: rgba(6, 207, 130,0.7);
+    border: 1px solid gray;
+    border-radius:5px;
+    cursor: pointer;
+}
+
+#submit:hover{
+    background-color: rgba(6, 207, 130,0.9);
+}
+
+#reset{
+    font-size: 18px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: rgba(207, 0, 0, 0.2);
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#reset:hover{
+    background-color: rgba(207, 0, 0, 0.4);
+}
