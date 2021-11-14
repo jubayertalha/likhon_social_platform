@@ -28,7 +28,7 @@
 <html>
     <head>
         <title><?php echo $userName; ?></title>
-        <style><?php include '../CSS/style.css'; include '../CSS/profile.css'; ?></style>
+        <style><?php include '../CSS/storycard.css';include '../CSS/profile.css'; ?></style>
     </head>
     <body>
         <?php require_once('header.php'); ?>
@@ -51,6 +51,11 @@
                     </div>
                     <?php if($isOwner){?><a id="edit" href="#">Edit</a><?php } ?>
                 </div>
+                <?php
+                    $_GET['id'] = "user";
+                    $_GET['writer'] = $user->userName;
+                    include('../View/storylist.php');
+                ?>
             </div>
         </div>
     </body>

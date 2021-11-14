@@ -22,6 +22,29 @@
             
         }
 
+        public function getStoryList($userName){
+            if($this->storyID=="user"){
+                return $this->getStoryListByUser($userName);
+            }
+            return array();
+        }
+
+        public function getStoryListByUser($userName){
+            $db = new DBCtr();
+            $conn = $db->connection();
+            $sql = "SELECT sotry_id FROM stories WHERE user_name = '".$userName."';";
+            $result = $conn->query($sql);
+            $storyID = "";
+            $storyList = array();
+            if($conn->query($sql)){
+                while($row = $result->fetch_assoc()) {
+                    $storyID = $row["sotry_id"];
+                    array_push($storyList,$storyID);
+                 }
+            }
+            return $storyList;
+        }
+
         public function getStory(){
             $db = new DBCtr();
             $conn = $db->connection();
@@ -54,6 +77,29 @@
                 echo $conn->error;
                 return false;
             }
+        }
+
+        function substrwords($text, $maxchar, $end='...') {
+            if (strlen($text) > $maxchar || $text == '') {
+                $words = preg_split('/\s/', $text);      
+                $output = '';
+                $i = 0;
+                while (1) {
+                    $length = strlen($output)+strlen($words[$i]);
+                    if ($length > $maxchar) {
+                        break;
+                    } 
+                    else {
+                        $output .= " " . $words[$i];
+                        ++$i;
+                    }
+                }
+                $output .= $end;
+            } 
+            else {
+                $output = $text;
+            }
+            return $output;
         }
     }
 ?>
