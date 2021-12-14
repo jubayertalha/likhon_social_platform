@@ -15,6 +15,8 @@
         }
     }
     $userController = new UserCtr($userName);
+    $userControllerf = new UserCtr($_SESSION['userName']);
+    $isFollow = $userControllerf->isFollowing($userName);
     $user = $userController->getAllUserInfo();
     $pic = "";
     if(empty($user->pic)){
@@ -28,6 +30,7 @@
 <html>
     <head>
         <title><?php echo $userName; ?></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <style><?php include '../CSS/storycard.css';include '../CSS/profile.css'; ?></style>
     </head>
     <body>
@@ -38,7 +41,7 @@
                     <div class="pic">
                     <img id="image" src="<?php $date = new DateTime(); $time = $date->format('YmdHis'); echo $pic."?=".$time; ?>" alt="Profile Image">
                     <?php if($isOwner){?><a id="change" href="../View/upload.php">Change Pic</a><?php }
-                    else{ ?> <a id="change" href="#">Follow</a><?php } ?>
+                    else{ ?> <a id="change"><?php echo $isFollow; ?></a><?php } ?>
                     </div>
                     <div class="info">
                         <h2><?php echo $user->fullName; ?></h2>
@@ -51,12 +54,38 @@
                     </div>
                     <?php if($isOwner){?><a id="edit" href="#">Edit</a><?php } ?>
                 </div>
+                <div class="pronav">
+                    
+                </div>
                 <?php
-                    $_GET['id'] = "user";
-                    $_GET['writer'] = $user->userName;
+                    $_POST['id'] = "user";
+                    $_POST['writer'] = $user->userName;
                     include('../View/storylist.php');
                 ?>
             </div>
         </div>
     </body>
+    <script>
+        $("#change").click(function(){
+            var textE = document.getElementById("change");
+            var text = textE.innerHTML;
+            if(text.toString()=="Follow"){
+                textE.innerHTML = "Unfollow";
+                $.post("../Controller/follow.php",
+                    {
+                        id : <?php echo $user->userName; ?>,
+                        type: "follow"
+                    }
+                );
+            }else if(text.toString()=="Unfollow"){
+                textE.innerHTML = "Follow";
+                $.post("../Controller/follow.php",
+                    {
+                        id : <?php echo $user->userName; ?>,
+                        type: "unfollow"
+                    }
+                );
+            }
+        });
+    </script>
 </html>

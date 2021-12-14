@@ -39,6 +39,7 @@
 
 #date{
     margin: 0px;
+    font-size: 14px;
 }
 
 #writerimage{
@@ -47,8 +48,13 @@
     margin-left: auto;
 }
 
+.storyInfo{
+    display: flex;
+}
+
 .bottom_menu{
     width: 100%;
+    margin-top: 8px;
 }
 
 .bottom_menu ul{
@@ -58,16 +64,25 @@
     overflow: hidden;
     list-style: none;
     background-color: cornflowerblue;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .bottom_menu li{
     color: white;
-    display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
-    padding-block-start: 16px;
-    padding-block-end: 16px;
+    padding-block-start: 10px;
+    padding-block-end: 10px;
     padding-left: 10px;
     padding-right: 10px;
     cursor: pointer;
+}
+
+.bottom_menu li:hover:active{
+    color: white;
+}
+
+.bottom_menu li:hover:not(.active){
+    color: black;
 }

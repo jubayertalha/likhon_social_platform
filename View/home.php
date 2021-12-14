@@ -1,17 +1,23 @@
-<?php session_start();
-    require_once('../Controller/session.php');
+<?php require_once('../Controller/session.php');
+    $userName = $_SESSION['userName'];
 ?>
+
 <html>
     <head>
-        <title>Likhon || Home</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style><?php include '../CSS/style.css'; ?></style>
+        <title><?php echo $userName; ?></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style><?php include '../CSS/storycard.css';include '../CSS/profile.css'; ?></style>
     </head>
     <body>
-        <?php require_once('header.php');?>
+        <?php require_once('header.php'); ?>
         <div class="main_container">
-        <h1 style="margin-left: 20px;">Home</h1>
-        </form>
+            <div class="profile">
+                <?php
+                    $_POST['id'] = "home";
+                    $_POST['writer'] = $userName;
+                    include('../View/storylist.php');
+                ?>
+            </div>
         </div>
     </body>
 </html>

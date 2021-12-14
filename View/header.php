@@ -12,7 +12,7 @@
             <ul>
                 <li><a href="/View/home.php">Home</a></li>
                 <li><a href="/View/post.php">Post</a></li>
-                <li><a href="#">Writers</a></li>
+                <li><a href="/View/writers.php">Writers</a></li>
             </ul>
         </div>
         <div class="right">

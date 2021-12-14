@@ -8,8 +8,9 @@
         $title = $_POST['title'];
         $story = $_POST['story'];
         $date = new DateTime();
-        $id = $date->format('YmdHis');
-        $time = date("Y-m-d",strtotime($id));
+        $d = $date->format('YmdHis');
+        $id = $d.$userName;
+        $time = date("YmdHis",strtotime($d));
         $fileLoc = $targeteLoc.$id.".json";
         if(!file_exists($targeteLoc)){
             mkdir($targeteLoc,0777,true);
